@@ -273,9 +273,6 @@ export default class WOW {
   }
 
   animate = (function animateFactory() {
-    if ('requestAnimationFrame' in window) {
-      return callback => window.requestAnimationFrame(callback);
-    }
     return callback => callback();
   }());
 
