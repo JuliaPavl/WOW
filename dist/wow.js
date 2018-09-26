@@ -63,9 +63,9 @@
   }
 
   function createEvent(event) {
-    var bubble = arguments.length <= 1 || arguments[1] === undefined ? false : arguments[1];
-    var cancel = arguments.length <= 2 || arguments[2] === undefined ? false : arguments[2];
-    var detail = arguments.length <= 3 || arguments[3] === undefined ? null : arguments[3];
+    var bubble = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    var cancel = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+    var detail = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
 
     var customEvent = void 0;
     if (document.createEvent != null) {
@@ -129,7 +129,7 @@
   }
 
   // Minimalistic WeakMap shim, just in case.
-  var WeakMap = window.WeakMap || window.MozWeakMap || function () {
+  var WeakMap = function () {
     function WeakMap() {
       _classCallCheck(this, WeakMap);
 
@@ -168,7 +168,7 @@
   }();
 
   // Dummy MutationObserver, to avoid raising exceptions.
-  var MutationObserver = window.MutationObserver || window.WebkitMutationObserver || window.MozMutationObserver || (_temp = _class = function () {
+  var MutationObserver = (_temp = _class = function () {
     function MutationObserver() {
       _classCallCheck(this, MutationObserver);
 
@@ -208,7 +208,7 @@
 
   var WOW = function () {
     function WOW() {
-      var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+      var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
       _classCallCheck(this, WOW);
 
@@ -224,11 +224,6 @@
       };
 
       this.animate = function animateFactory() {
-        if ('requestAnimationFrame' in window) {
-          return function (callback) {
-            return window.requestAnimationFrame(callback);
-          };
-        }
         return function (callback) {
           return callback();
         };

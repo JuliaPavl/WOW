@@ -70,8 +70,7 @@ function getInnerHeight() {
 }
 
 // Minimalistic WeakMap shim, just in case.
-const WeakMap = window.WeakMap || window.MozWeakMap ||
-class WeakMap {
+const WeakMap = class WeakMap {
   constructor() {
     this.keys = [];
     this.values = [];
@@ -102,23 +101,20 @@ class WeakMap {
 };
 
 // Dummy MutationObserver, to avoid raising exceptions.
-const MutationObserver =
-  window.MutationObserver || window.WebkitMutationObserver ||
-  window.MozMutationObserver ||
-  class MutationObserver {
-    constructor() {
-      if (typeof console !== 'undefined' && console !== null) {
-        console.warn('MutationObserver is not supported by your browser.');
-        console.warn(
-          'WOW.js cannot detect dom mutations, please call .sync() after loading new content.'
-        );
-      }
+const MutationObserver = class MutationObserver {
+  constructor() {
+    if (typeof console !== 'undefined' && console !== null) {
+      console.warn('MutationObserver is not supported by your browser.');
+      console.warn(
+        'WOW.js cannot detect dom mutations, please call .sync() after loading new content.'
+      );
     }
+  }
 
-    static notSupported = true;
+  static notSupported = true;
 
-    observe() {}
-  };
+  observe() {}
+};
 
 // getComputedStyle shim, from http://stackoverflow.com/a/21797294
 const getComputedStyle = window.getComputedStyle ||
