@@ -117,8 +117,7 @@ const MutationObserver = class MutationObserver {
 };
 
 // getComputedStyle shim, from http://stackoverflow.com/a/21797294
-const getComputedStyle = window.getComputedStyle ||
-function getComputedStyle(el) {
+const getComputedStyle = function getComputedStyle(el) {
   const getComputedStyleRX = /(\-([a-z]){1})/g;
   return {
     getPropertyValue(prop) {
